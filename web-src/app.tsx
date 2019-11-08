@@ -29,16 +29,16 @@ export class App extends Component<AppProps, AppState> {
     super(props);
     this.state = {
       text: `<?xml version="1.0" encoding="UTF-8"?>
-    <output>
-      <ticket>
-      <line>
-      <text>This is the first line</text>
-      </line>  
-      <line>
-      <text>This is the second line</text>
-      </line>  
-      </ticket>
-    </output>
+  <output>
+    <ticket>
+    <line>
+    <text>This is the first line</text>
+    </line>  
+    <line>
+    <text>This is the second line</text>
+    </line>  
+    </ticket>
+  </output>
     `
     };
 
@@ -57,7 +57,12 @@ export class App extends Component<AppProps, AppState> {
     evt: React.MouseEvent<HTMLButtonElement>
   ): Promise<void> {
     await this.printText(this.usbwebprinter);
-    alert('success');
+    alert('Success');
+  }
+
+  async handleClickBT(evt: React.MouseEvent<HTMLButtonElement>): Promise<void> {
+    await this.printText(this.btwebprinter);
+    alert('Success');
   }
 
   updateText(evt: React.ChangeEvent<HTMLTextAreaElement>): void {
@@ -69,10 +74,20 @@ export class App extends Component<AppProps, AppState> {
   render(): JSX.Element {
     return (
       <div>
-        <button onClick={evt => this.handleClickUSB(evt)}>Press me</button>
-        <textarea onChange={evt => this.updateText(evt)}>
-          {this.state.text}
-        </textarea>
+        <h1>Openbravo Web Hardware</h1>
+        <div>
+          <button onClick={evt => this.handleClickUSB(evt)}>
+            WebUSB print
+          </button>
+          <button onClick={evt => this.handleClickBT(evt)}>
+            WebBluetooth print
+          </button>
+        </div>
+        <div>
+          <textarea onChange={evt => this.updateText(evt)} rows={30} cols={60}>
+            {this.state.text}
+          </textarea>
+        </div>
       </div>
     );
   }
