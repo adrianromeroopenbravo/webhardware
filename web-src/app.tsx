@@ -34,9 +34,12 @@ export class App extends Component<AppProps, AppState> {
     <line>
     <text>This is the first line</text>
     </line>  
+    <line size="2">
+    <text>This is the second line</text>
+    </line>
     <line>
     <text>This is the second line</text>
-    </line>  
+    </line> 
     </ticket>
   </output>
     `
@@ -61,8 +64,12 @@ export class App extends Component<AppProps, AppState> {
   }
 
   async handleClickBT(evt: React.MouseEvent<HTMLButtonElement>): Promise<void> {
-    await this.printText(this.btwebprinter);
-    alert('Success');
+    try {
+      await this.printText(this.btwebprinter);
+      alert('Success.');
+    } catch (error) {
+      alert('Cannot print.');
+    }
   }
 
   updateText(evt: React.ChangeEvent<HTMLTextAreaElement>): void {
