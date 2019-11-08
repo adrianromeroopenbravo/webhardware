@@ -11,31 +11,69 @@
  */
 
 import React, { Component } from 'react';
+import { WEBPrinter } from './webprinter';
+import { EPSONTMT88V } from './epsontmt88v';
+import { BTGENERIC } from './btgeneric';
 
 export interface AppProps {}
 
 export interface AppState {
-  data: string[];
+  text: string;
 }
 
 export class App extends Component<AppProps, AppState> {
+  usbwebprinter: WEBPrinter;
+  btwebprinter: WEBPrinter;
 
   constructor(props: AppProps) {
     super(props);
-
     this.state = {
-      data:[]
+      text: `<?xml version="1.0" encoding="UTF-8"?>
+    <output>
+      <ticket>
+      <line>
+      <text>This is the first line</text>
+      </line>  
+      <line>
+      <text>This is the second line</text>
+      </line>  
+      </ticket>
+    </output>
+    `
     };
 
-    this.handleClick = this.handleClick.bind(this);
+    this.usbwebprinter = new WEBPrinter(EPSONTMT88V);
+    this.btwebprinter = new WEBPrinter(BTGENERIC);
   }
 
+  async printText(printer: WEBPrinter) {
+    if (!printer.connected()) {
+      await printer.request();
+    }
+    await printer.print(this.state.text);
+  }
 
-  handleClick(event: React.MouseEvent<HTMLButtonElement>): void {
-    console.log('Hello  ');
+  async handleClickUSB(
+    evt: React.MouseEvent<HTMLButtonElement>
+  ): Promise<void> {
+    await this.printText(this.usbwebprinter);
+    alert('success');
+  }
+
+  updateText(evt: React.ChangeEvent<HTMLTextAreaElement>): void {
+    this.setState({
+      text: evt.target.value
+    });
   }
 
   render(): JSX.Element {
-    return <button onClick={this.handleClick}>Press me</button>;
+    return (
+      <div>
+        <button onClick={evt => this.handleClickUSB(evt)}>Press me</button>
+        <textarea onChange={evt => this.updateText(evt)}>
+          {this.state.text}
+        </textarea>
+      </div>
+    );
   }
 }

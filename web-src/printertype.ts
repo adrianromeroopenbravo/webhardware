@@ -10,7 +10,13 @@
  ************************************************************************************
  */
 
-.display-background {
-  background: url(./loginBackground.svg);
-  background-size: cover;
+export interface WebDevice {
+  connected(): boolean;
+  request(): Promise<void>;
+  sendData(data: Uint8Array): Promise<void>;
+}
+
+export interface PrinterType {
+  name: string;
+  createWebDevice: () => WebDevice;
 }

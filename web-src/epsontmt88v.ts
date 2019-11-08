@@ -10,7 +10,14 @@
  ************************************************************************************
  */
 
-.display-background {
-  background: url(./loginBackground.svg);
-  background-size: cover;
-}
+import { USB } from './usb';
+import { PrinterType } from './printertype';
+
+export const EPSONTMT88V: PrinterType = {
+  name: 'EPSON TM T88V',
+  createWebDevice: () =>
+    new USB({
+      vendorId: 0x04b8,
+      productId: 0x0202
+    })
+};

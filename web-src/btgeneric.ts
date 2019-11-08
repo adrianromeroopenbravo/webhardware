@@ -10,7 +10,15 @@
  ************************************************************************************
  */
 
-.display-background {
-  background: url(./loginBackground.svg);
-  background-size: cover;
-}
+import { Bluetooth } from './bluetooth';
+import { PrinterType } from './printertype';
+
+export const BTGENERIC: PrinterType = {
+  name: 'Generic Bluetooth Receipt Printer',
+  createWebDevice: () =>
+    new Bluetooth({
+      services: ['e7810a71-73ae-499d-8c15-faa9aef0c3f2'],
+      characteristic: 'bef8d6c9-9c21-4c9e-b632-bd58c1009f9f',
+      buffersize: 20
+    })
+};

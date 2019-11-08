@@ -10,7 +10,9 @@
  ************************************************************************************
  */
 
-.display-background {
-  background: url(./loginBackground.svg);
-  background-size: cover;
+export function arrays8append(a1: Uint8Array, a2: Uint8Array): Uint8Array {
+  const tmp = new Uint8Array(a1.length + a2.length);
+  tmp.set(a1, 0);
+  tmp.set(a2, a1.byteLength);
+  return tmp;
 }

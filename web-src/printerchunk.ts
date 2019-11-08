@@ -10,7 +10,14 @@
  ************************************************************************************
  */
 
-.display-background {
-  background: url(./loginBackground.svg);
-  background-size: cover;
+export type PrintChunk = (data: Uint8Array) => Promise<void>;
+
+export async function arrays8print(
+  printChunk: PrintChunk,
+  size: number,
+  data: Uint8Array
+) {
+  for (let i = 0; i < data.length; i += size) {
+    await printChunk(data.slice(i, i + size));
+  }
 }
