@@ -29,20 +29,25 @@ export class App extends Component<AppProps, AppState> {
     super(props);
     this.state = {
       text: `<?xml version="1.0" encoding="UTF-8"?>
-  <output>
-    <ticket>
-    <line>
-    <text>This is the first line</text>
-    </line>  
-    <line size="2">
-    <text>This is the second line</text>
-    </line>
-    <line>
-    <text>This is the second line</text>
-    </line> 
-    </ticket>
-  </output>
-    `
+<output>
+  <ticket>
+  <line size="2">
+    <text>Big text</text>
+  </line>
+  <line>
+    <text>Normal text in first line</text>
+  </line>  
+  <line>
+    <text>More text</text>
+  </line>  
+  <line>
+    <text>And also </text>
+    <text bold="true">styled </text>
+    <text underline="true">text</text>
+    <text> too</text>
+  </line> 
+  </ticket>
+</output>`
     };
 
     this.usbwebprinter = new WEBPrinter(EPSONTMT88V);
@@ -50,26 +55,25 @@ export class App extends Component<AppProps, AppState> {
   }
 
   async printText(printer: WEBPrinter) {
-    if (!printer.connected()) {
-      await printer.request();
+    try {
+      if (!printer.connected()) {
+        await printer.request();
+      }
+      await printer.print(this.state.text);
+      alert('Success.');
+    } catch (error) {
+      alert('Cannot print.');
     }
-    await printer.print(this.state.text);
   }
 
   async handleClickUSB(
     evt: React.MouseEvent<HTMLButtonElement>
   ): Promise<void> {
     await this.printText(this.usbwebprinter);
-    alert('Success');
   }
 
   async handleClickBT(evt: React.MouseEvent<HTMLButtonElement>): Promise<void> {
-    try {
-      await this.printText(this.btwebprinter);
-      alert('Success.');
-    } catch (error) {
-      alert('Cannot print.');
-    }
+    await this.printText(this.btwebprinter);
   }
 
   updateText(evt: React.ChangeEvent<HTMLTextAreaElement>): void {
