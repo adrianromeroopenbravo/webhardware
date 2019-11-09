@@ -18,6 +18,7 @@ export interface BTPrinterType {
   characteristic: string;
   buffersize: number;
 }
+
 export class Bluetooth implements WebDevice {
   printertype: BTPrinterType;
   size: number;
@@ -41,7 +42,7 @@ export class Bluetooth implements WebDevice {
 
   async request(): Promise<void> {
     if (!navigator.bluetooth || !navigator.bluetooth.requestDevice) {
-      return Promise.reject('Bluetooth not supported.');
+      throw 'Bluetooth not supported.';
     }
 
     this.device = await navigator.bluetooth.requestDevice({
@@ -59,9 +60,7 @@ export class Bluetooth implements WebDevice {
     }
 
     try {
-      if (this.characteristic) {
-        await arrays8print(this.printChunk(), this.size, data);
-      } else {
+      if (!this.characteristic) {
         this.server = await this.device.gatt.connect();
         this.service = await this.server.getPrimaryService(
           this.printertype.services[0]
@@ -69,8 +68,8 @@ export class Bluetooth implements WebDevice {
         this.characteristic = await this.service.getCharacteristic(
           this.printertype.characteristic
         );
-        await arrays8print(this.printChunk(), this.size, data);
       }
+      await arrays8print(this.printChunk(), this.size, data);
     } catch (error) {
       this.onDisconnected();
       throw error;
