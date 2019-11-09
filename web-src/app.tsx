@@ -32,19 +32,22 @@ export class App extends Component<AppProps, AppState> {
 <output>
   <ticket>
   <line size="2">
-    <text>Big text</text>
+    <text>Lorem ipsum</text>
   </line>
   <line>
-    <text>Normal text in first line</text>
+    <text>dolor sit amet,</text>
   </line>  
   <line>
-    <text>More text</text>
+    <text>consectetur adipiscing elit,</text>
   </line>  
   <line>
-    <text>And also </text>
-    <text bold="true">styled </text>
-    <text underline="true">text</text>
-    <text> too</text>
+    <text>do eiusmod </text>
+    <text bold="true">tempor incididunt</text>
+  </line>
+  <line>
+    <text>ut </text>
+    <text underline="true">labore et dolore</text>
+    <text> magna aliqua.</text>
   </line> 
   </ticket>
 </output>`
@@ -85,17 +88,22 @@ export class App extends Component<AppProps, AppState> {
   render(): JSX.Element {
     return (
       <div>
-        <h1>Openbravo Web Hardware</h1>
+        <h1 className="title">Openbravo Web Hardware</h1>
         <div>
-          <button onClick={evt => this.handleClickUSB(evt)}>
-            WebUSB print
+          <button className="action" onClick={evt => this.handleClickUSB(evt)}>
+            PRINT (WebUSB)
           </button>
-          <button onClick={evt => this.handleClickBT(evt)}>
-            WebBluetooth print
+          <button className="action" onClick={evt => this.handleClickBT(evt)}>
+            PRINT (WebBluetooth)
           </button>
         </div>
         <div>
-          <textarea onChange={evt => this.updateText(evt)} rows={30} cols={60}>
+          <textarea
+            className="document-editor"
+            onChange={evt => this.updateText(evt)}
+            rows={30}
+            cols={40}
+          >
             {this.state.text}
           </textarea>
         </div>
