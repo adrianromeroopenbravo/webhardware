@@ -44,13 +44,6 @@ module.exports = {
           filename: '[name].bundle.js',
           enforce: true
         },
-        antd: {
-          priority: 100,
-          test: /[\\/]node_modules[\\/](antd)[\\/]/,
-          name: 'antd',
-          filename: '[name].bundle.js',
-          enforce: true
-        },
         common: {
           priority: 1,
           test: /[\\/]node_modules[\\/]/,
