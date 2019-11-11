@@ -33,7 +33,7 @@ export class App extends Component<AppProps, AppState> {
       text: `<?xml version="1.0" encoding="UTF-8"?>
 <output>
   <ticket>
-  <line size="2">
+  <line size="1">
     <text>Lorem ipsum</text>
   </line>
   <line>
