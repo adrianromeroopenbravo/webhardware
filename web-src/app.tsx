@@ -16,6 +16,7 @@ import { EPSONTMT88V } from './epsontmt88v';
 import { BTGENERIC } from './btgeneric';
 
 import githubribbon from './styles/forkme_right_green_007200.svg';
+import openbravologo from './styles/OBWhite_Footer.png';
 
 export interface AppProps {}
 
@@ -97,7 +98,16 @@ export class App extends Component<AppProps, AppState> {
             alt="Fork me on GitHub"
           />
         </a>
-        <h1 className="title">Openbravo Web Hardware</h1>
+        <h1 className="title">
+          <a href="https://www.openbravo.com">
+            <img
+              src={openbravologo}
+              style={{ width: '4em' }}
+              alt="Openbravo, S.L.U."
+            />
+          </a>
+          &nbsp;Web Hardware
+        </h1>
         <div>
           <button className="action" onClick={evt => this.handleClickUSB(evt)}>
             PRINT (WebUSB)
