@@ -15,6 +15,8 @@ import { WEBPrinter } from './webprinter';
 import { EPSONTMT88V } from './epsontmt88v';
 import { BTGENERIC } from './btgeneric';
 
+import githubribbon from './styles/forkme_right_green_007200.svg';
+
 export interface AppProps {}
 
 export interface AppState {
@@ -88,6 +90,13 @@ export class App extends Component<AppProps, AppState> {
   render(): JSX.Element {
     return (
       <div>
+        <a href="https://github.com/adrianromeroopenbravo/webhardware">
+          <img
+            src={githubribbon}
+            style={{ position: 'absolute', top: 0, right: 0 }}
+            alt="Fork me on GitHub"
+          />
+        </a>
         <h1 className="title">Openbravo Web Hardware</h1>
         <div>
           <button className="action" onClick={evt => this.handleClickUSB(evt)}>
