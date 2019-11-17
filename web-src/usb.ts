@@ -63,7 +63,6 @@ export class USB implements WebDevice {
     }
     try {
       await this.device.open();
-      console.log('entrando3');
 
       await this.device.selectConfiguration(1);
       await this.device.claimInterface(0);
