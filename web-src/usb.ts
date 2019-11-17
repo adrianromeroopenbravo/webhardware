@@ -68,9 +68,8 @@ export class USB implements WebDevice {
       await this.device.claimInterface(0);
       await arrays8print(this.printChunk(), 64, data);
       await this.device.close();
-    } catch (error) {
+    } finally {
       this.onDisconnected();
-      throw error;
     }
   }
 
