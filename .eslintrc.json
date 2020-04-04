@@ -3,13 +3,12 @@
     "browser": true,
     "es6": true
   },
-  "extends": ["eslint:recommended", "prettier"],
+  "extends": ["eslint:recommended"],
   "parserOptions": {
     "ecmaVersion": 9,
     "sourceType": "module"
   },
-  "globals": {
-  },
+  "globals": {},
   "rules": {
     "eqeqeq": ["warn", "smart"],
     "no-unused-vars": [
